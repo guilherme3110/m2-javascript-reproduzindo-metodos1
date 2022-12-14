@@ -2,102 +2,110 @@
 
 
 // 1 filter()
- 
-const filterNumbers = (arrayNumbers) => {
-    
-    const filteredNumbers = arrayNumbers.filter((number) => {
-        return number >= 15
-    })
+ const numbers = [10,40,50,60,70]
+   
 
-    return filteredNumbers
-}
+ function callbackFilter(elemento){
+    if(elemento >= 15){
+        return elemento
+    }
+ }
 
-console.log(filterNumbers([32,-87,-31,-26,21,16,14,79,13]))
+function filtrarArray(number, callback){
+    const outuput = [] 
+    for( let i = 0; i < number.length; i++){
+        outuput.push(callback(number[i]))
+    }
+    return outuput
+ }
+
+ console.log( filtrarArray(numbers, callbackFilter))
 
 // find()
 
-const games = [
-    {
-        nome:'God of War',
-        preço: 199.99,
-        genero:'MMO'
-    },
-    {
-        nome:'Uncharted',
-        preço: 159.99,
-        genero: 'aventura'
-    },
-    {
-        nome: 'Spider-Man',
-        preço: 299.99,
-        genero: 'Heroi / aventura'
+const arrayNumbers =[30,40,50,60,70]
+
+function callbackFind(elemento, index, array){
+    if(elemento > 30){
+        return true
+    }else{
+        return false
     }
- ]
-    
-    const procuraPorPreco = (arrayDeProdutos) => {
+}
 
-        const produtoEncontrado = arrayDeProdutos.find((games) => {
-            return games.preço < 200
-        }) 
-
-        return produtoEncontrado
+function meuMetodoFind(arrayNumbers, callback){
+    for(let i = 0 ; i < arrayNumbers.length; i++){
+        if(callback(arrayNumbers[i], i,arrayNumbers) == true){
+            return arrayNumbers[i]
+        }
     }
+    return undefined
+ 
+}
 
-    console.log(procuraPorPreco(games))
+console.log(meuMetodoFind(arrayNumbers,callbackFind))
 
 
 //includes() não recebe uma callback , somente o elemento a ser 
 
-const contadorDeVogais = (palavra) => {
+const arrayincludes = [59,24,52,49,24] 
 
-    const palavraNormalizada = palavra.toLowerCase()
-    //console.log(palavraNormalizada)
-    const arrayPalavra = palavraNormalizada.split('')
-    console.log(arrayPalavra)
-    const vogais = [ 'a', 'e', 'i', 'o', 'u'] 
-    
-    let count = 0
-
-    arrayPalavra.forEach(letra => {
-        if(vogais.includes(letra)){
-            count++
-        }
-    })
-    return count
-}
-
-console.log(contadorDeVogais('paralelepipedo'))
-
-// reduce() 
-
-const numerosPositivos = [35,27,43,18,64]
-
-const multReduce = (arrayDeNumeros) => {
-
-    const valorREduzido = arrayDeNumeros.reduce((acumulador, valorAtual) =>{
-
-        let total = acumulador + valorAtual
-
-        return total
-
-    }, 1)
-
-    return valorREduzido
-}
-
-console.log(multReduce(numerosPositivos))
-
-
-//forEach 
-const newForEach = (array, callback) => {
-    for(let i = 0; i < array.length; i++){
-        callback(array[i], i, array)
+function callbackIncludes(elnto, index, arrayeme){
+    if(arrayincludes == 10){
+        return true
+    }else{
+        return false
     }
 }
 
+function meuMetodoIncludes(arrayincludes){
+    for(let i = 0; i < arrayincludes.length; i++){
+        if(callbackIncludes(arrayincludes[i]) == true){
+            return arrayincludes[i]
+        }
+    }
+    return false
+}
+
+console.log(meuMetodoIncludes(arrayincludes, 12))
 
 
+//indexOf
 
+const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
 
-// indexOf
+function meuMetodoIndexOf(array, searchItem){
+
+    for(let i = 0; i < array.length; i++){
+        if(array[i] == searchItem){
+            return i
+        }
+        
+    }
+    return -1
+    }
+
+ console.log(meuMetodoIndexOf(beasts, 'frango'))   
+
+// reduce()
+
+const array2 = [99,51,16,75]
+
+function callbackReduce(acumulador, valorAtual){
+    return valorAtual + acumulador
+}
+
+function meuMetodoReduce(array, callback, valorInicial){
+    let count = valorInicial
+
+    for(let i = 0; i < array.length; i++){
+        count = callback(count, array[i])
+    }
+    return count
+}
+
+console.log(meuMetodoReduce(array2,callbackReduce,0))
+
+// map()
+
 
