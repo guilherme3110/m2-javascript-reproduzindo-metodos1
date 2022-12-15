@@ -8,6 +8,8 @@
  function callbackFilter(elemento){
     if(elemento >= 15){
         return elemento
+    }else{
+        //return numbers
     }
  }
 
@@ -108,4 +110,20 @@ console.log(meuMetodoReduce(array2,callbackReduce,0))
 
 // map()
 
+const array3 = [1,4,9]
+function callbackMap(valorAtual, indice , array){
+    return valorAtual * 2
+}
+ 
 
+function meuMetodoMap(elemento,callback ){
+    const newArr = []
+    for(let i = 0; i < elemento.length; i++){
+        const resultado = callback(elemento[i],i ,elemento)
+         newArr.push(resultado)
+
+    }
+    return newArr
+}
+
+console.log(meuMetodoMap(array3,callbackMap))
